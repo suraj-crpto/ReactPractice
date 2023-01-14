@@ -36,6 +36,7 @@ const userform = () => {
                Reset
             </button><br/><br/>
             <button><Link to="/user/listing">User listing</Link></button>
+            <button><Link to="/user/formikform">Formik Form</Link></button>
             <h1>{count}</h1>
             <h5>{username} is typing</h5>
           </div>

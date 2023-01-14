@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { createElement, useEffect, useState } from "react";
 import './css/userlisting.css'
-import Getuser from '../../Api/GetUser'
 function userlisting() {
     const [page,setpage] = useState(0);
     const [list,setlist] = useState([]);
+    const [total_pages,settotal_pages] = useState([]);
     function mappingobject(pager,jsonobject) {
         let page_number = pager.page;
         let offset = page_number + 5
@@ -14,6 +14,12 @@ function userlisting() {
         let response = await fetch('https://fakestoreapi.com/products');
         let result =  await response.json();
         let final_result = mappingobject({page},result);
+        var total_page = result.length/5;
+        var numbers = [];
+        for (var i = 0; i < total_page; i++) {
+            numbers.push(i);
+        }
+        settotal_pages(numbers);
         setlist(final_result);
     }
     function handlePrevious(){
@@ -70,8 +76,13 @@ function userlisting() {
                     </tbody>
                   </table>
                 </div>
-                    <button type = 'button' onClick = {handlePrevious}>Previous</button>
-                    <button  type = "button " onClick = {handleNext} >Next</button>
+                    <button type = 'button' onClick = {()=>handlePrevious()}>Previous</button>
+                    {
+                        total_pages.map((item) =>
+                          <button  onClick = {()=>setpage(item * 5)}>{item+1}</button>
+                        )
+                    }
+                    <button  type = "button " onClick = {()=>handleNext()} >Next</button>
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import UserListing from './components/User/UserListing'
+import Formikform from './components/User/FormikForm'
 import './index.css'
 import {
   createBrowserRouter,
@@ -21,6 +22,12 @@ const router = createBrowserRouter([
     path: "/user/listing",
     element: (
       <UserListing/>
+    ),
+  },
+  {
+    path: "/user/formikform",
+    element: (
+      <Formikform/>
     ),
   }
 ]);
